@@ -42,6 +42,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sainnhe/sonokai'
 	Plug 'scrooloose/nerdcommenter'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Key mapping

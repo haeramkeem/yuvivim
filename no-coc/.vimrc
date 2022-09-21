@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'sainnhe/sonokai'
 	Plug 'scrooloose/nerdcommenter'
+    Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Key mapping
