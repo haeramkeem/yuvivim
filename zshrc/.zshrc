@@ -154,6 +154,8 @@ git-ss() {
     local BRANCH=$2
     git branch -m $BRANCH $STATE/$BRANCH
 }
+## git typo correction
+alias gti='git'
 
 # Colordiff
 alias diff=colordiff
