@@ -154,3 +154,6 @@ git-ss() {
     local BRANCH=$2
     git branch -m $BRANCH $STATE/$BRANCH
 }
+
+# Colordiff
+alias diff=colordiff
