@@ -1,0 +1,9 @@
+#!/bin/bash
+
+kubecfg() {
+    KUBECONFIG=$1
+    shift
+    kubectl $@
+}
+
+kubecfg ./haeramkim2.config get all -A

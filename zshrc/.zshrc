@@ -159,3 +159,9 @@ alias gti='git'
 
 # Colordiff
 alias diff=colordiff
+
+# Add 'sbin' to $PATH
+export PATH="/usr/local/sbin:$PATH"
+
+# PSQL
+export PATH="/usr/local/opt/libpq/bin:$PATH"
