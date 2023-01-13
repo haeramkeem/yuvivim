@@ -142,6 +142,13 @@ KUBE_PS1_CTX_COLOR="green"
 # Kubectl --context
 alias kubectx='kubectl --context'
 
+# KUBECONFIG=$1 kubectl
+kubecfg() {
+    KUBECONFIG=$1
+    shift
+    KUBECONFIG=$KUBECONFIG kubectl $@
+}
+
 # Calm down mate
 alias fuck='echo "fuck all of ya"'
 
