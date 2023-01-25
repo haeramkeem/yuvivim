@@ -164,6 +164,9 @@ kubecfg() {
     KUBECONFIG=$KUBECONFIG kubectl $@
 }
 
+# kubectl -n
+alias kubecns='kubectl config set-context --current --namespace'
+
 #########################
 # Git hacks
 #########################
