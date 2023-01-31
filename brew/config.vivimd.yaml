@@ -1,0 +1,7 @@
+formulae:
+  list:
+    - name: colordiff
+    - name: git
+    - name: jq
+    - name: watch
+    - name: yq
