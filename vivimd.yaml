@@ -1,6 +1,7 @@
 sync:
-  brew:
-    configPath: brew/config.vivimd.yaml
-  vim: {}
-  git: {}
-  zshrc: {}
+  subject:
+    brew:
+      configPath: brew/config.vivimd.yaml
+    vim: {}
+    git: {}
+    zshrc: {}
