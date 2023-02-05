@@ -1,0 +1,4 @@
+version: v1.0.0
+require:
+  - name: yq
+    version: ""
