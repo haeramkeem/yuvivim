@@ -70,7 +70,10 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    kube-ps1
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,7 +108,7 @@ source $ZSH/oh-my-zsh.sh
 #########################
 # Python 3 settings
 #########################
-#export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
+export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
 export PATH=$PATH:$HOME/.local/bin
 alias python='python3'
 alias pip='pip3'
@@ -127,6 +130,8 @@ export PATH=$PATH:$GOPATH/bin
 # VIM settings
 #########################
 alias vi=vim
+# Prevent typo
+alias ci=vim
 
 #########################
 # NVM settings
@@ -148,11 +153,13 @@ export LANG=en_US.UTF-8
 source <(kubectl completion zsh)
 
 # Kube-ps1
-source "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
 PS1='$(kube_ps1)'$PS1
-KUBE_PS1_PREFIX="\n("
-KUBE_PS1_SYMBOL_COLOR="gray"
+KUBE_PS1_PREFIX="["
+KUBE_PS1_SUFFIX="]"
+KUBE_PS1_SYMBOL_COLOR="blue"
 KUBE_PS1_CTX_COLOR="green"
+KUBE_PS1_SYMBOL_PADDING="true"
+KUBE_PS1_SEPARATOR="|"
 
 # Kubectl --context
 alias kubectx='kubectl --context'
@@ -166,6 +173,14 @@ kubecfg() {
 
 # kubectl -n
 alias kubecns='kubectl config set-context --current --namespace'
+
+# Kubectl plugins
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+#########################
+# Cilium
+#########################
+alias ciliumx='cilium --context'
 
 #########################
 # Git hacks
@@ -188,7 +203,14 @@ alias gti='git'
 export PATH="/usr/local/sbin:$PATH"
 
 # PSQL
-export PATH="/usr/local/opt/libpq/bin:$PATH"
+export PATH="/usr/local/opt/libkq/bin:$PATH"
+
+#########################
+# TMUX
+#########################
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 
 #########################
 # ETC
