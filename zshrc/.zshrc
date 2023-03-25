@@ -108,27 +108,32 @@ source $ZSH/oh-my-zsh.sh
 #########################
 # Python 3 settings
 #########################
-export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
-export PATH=$PATH:$HOME/.local/bin
-alias python='python3'
-alias pip='pip3'
+
+# export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
+# export PATH=$PATH:$HOME/.local/bin
+# alias python='python3'
+# alias pip='pip3'
 
 #########################
 # C++ settings
 #########################
-alias g++='g++ -std=c++17'
+
+# alias g++='g++ -std=c++17'
 
 #########################
 # Golang settings
 #########################
-export GOPATH="$HOME/go"
-export GOROOT="/usr/local/go"
-export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$GOPATH/bin
+
+# export GOPATH="$HOME/go"
+# export GOROOT="/usr/local/go"
+# export PATH=$PATH:$GOROOT/bin
+# export PATH=$PATH:$GOPATH/bin
 
 #########################
 # VIM settings
 #########################
+
+# Use improved
 alias vi=vim
 # Prevent typo
 alias ci=vim
@@ -136,19 +141,16 @@ alias ci=vim
 #########################
 # NVM settings
 #########################
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-#########################
-# Locale settings
-#########################
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+# NVM basic
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 #########################
 # Kubectl settings
 #########################
+
 # Kubectl auto-completion
 source <(kubectl completion zsh)
 
@@ -180,25 +182,31 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 #########################
 # Cilium
 #########################
+
+# Cilium w/ context
 alias ciliumx='cilium --context'
 
 #########################
 # Git hacks
 #########################
-## Get current branch (CURrent)
+
+# Get current branch (CURrent)
 alias git-cur='git rev-parse --abbrev-ref HEAD'
-## Set branch state (SetState)
+
+# Set branch state (SetState)
 git-ss() {
     local STATE=$1
     local BRANCH=$2
     git branch -m $BRANCH $STATE/$BRANCH
 }
+
 ## git typo correction
 alias gti='git'
 
 #########################
 # $PATH configuration
 #########################
+
 # Add 'sbin' to $PATH
 export PATH="/usr/local/sbin:$PATH"
 
@@ -208,6 +216,8 @@ export PATH="/usr/local/opt/libkq/bin:$PATH"
 #########################
 # TMUX
 #########################
+
+# TMUX autostart
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux
 fi
@@ -215,7 +225,13 @@ fi
 #########################
 # ETC
 #########################
+
 # Colordiff
 alias diff=colordiff
+
 # Calm down mate
 alias fuck='echo "fuck all of ya"'
+
+# Locale settings
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
