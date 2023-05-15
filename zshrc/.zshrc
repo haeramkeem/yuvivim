@@ -237,6 +237,7 @@ alias diff=colordiff
 
 # Calm down mate
 alias fuck='echo "fuck all of ya"'
+alias tlqkf='echo "fuck my life"'
 
 # Locale settings
 export LC_ALL=en_US.UTF-8
