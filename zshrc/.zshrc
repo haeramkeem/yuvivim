@@ -109,25 +109,25 @@ source $ZSH/oh-my-zsh.sh
 # Python 3 settings
 #########################
 
-# export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
-# export PATH=$PATH:$HOME/.local/bin
-# alias python='python3'
-# alias pip='pip3'
+export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
+export PATH=$PATH:$HOME/.local/bin
+alias python='python3'
+alias pip='pip3'
 
 #########################
 # C++ settings
 #########################
 
-# alias g++='g++ -std=c++17'
+alias g++='g++ -std=c++17'
 
 #########################
 # Golang settings
 #########################
 
-# export GOPATH="$HOME/go"
-# export GOROOT="/usr/local/go"
-# export PATH=$PATH:$GOROOT/bin
-# export PATH=$PATH:$GOPATH/bin
+export GOPATH="$HOME/go"
+export GOROOT="/usr/local/go"
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 
 #########################
 # VIM settings
@@ -194,7 +194,8 @@ alias ciliumx='cilium --context'
 alias git-cur='git rev-parse --abbrev-ref HEAD'
 
 # Set branch state (SetState)
-git-ss() {
+# Change Git Branch Status (GBS)
+chgbs() {
     local STATE=$1
     local BRANCH=$2
     git branch -m $BRANCH $STATE/$BRANCH
@@ -226,8 +227,9 @@ fi
 # ZSH
 #########################
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || true # Ignore `file not found`
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || true # Ignore `file not found`
 
 #########################
 # ETC
