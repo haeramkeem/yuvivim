@@ -163,9 +163,6 @@ KUBE_PS1_CTX_COLOR="green"
 KUBE_PS1_SYMBOL_PADDING="true"
 KUBE_PS1_SEPARATOR="|"
 
-# Kubectl --context
-alias kubectx='kubectl --context'
-
 # KUBECONFIG=$1 kubectl
 kubecfg() {
     KUBECONFIG=$1
@@ -173,8 +170,8 @@ kubecfg() {
     KUBECONFIG=$KUBECONFIG kubectl $@
 }
 
-# kubectl -n
-alias kubecns='kubectl config set-context --current --namespace'
+# kubecns
+alias kubecns='kubens'
 
 # Kubectl plugins
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
