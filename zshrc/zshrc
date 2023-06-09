@@ -239,6 +239,11 @@ alias diff=colordiff
 alias fuck='echo "fuck all of ya"'
 alias tlqkf='echo "fuck my life"'
 
+# Aliases
+alias alphabet='echo abcdefghijklmnopqrstuvwxyz'
+alias history='history -i'
+alias watch='watch -d -n0.2'
+
 # Locale settings
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
