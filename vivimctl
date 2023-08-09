@@ -1,6 +1,8 @@
 #!/bin/bash
 # vim: set ft=sh:
 
+VERSION="v0.1.0"
+
 function zshrc() {
     local zshrc_src="./zshrc/.zshrc"
     local zshrc_dst="$HOME/.zshrc"
@@ -46,10 +48,34 @@ function zshrc_diff() {
         && echo "zshrc synced with '$HOME/.zshrc'"
 }
 
+function main_help() {
+cat << EOF | column -t -s '|'
+SUBCOMMAND|DESCRIPTION
+zshrc|Manage zsh configuration file (zshrc)
+EOF
+}
+
+function main_version() {
+cat << EOF
+VIVIMCTL version $VERSION
+
+GIT STATUS:
+$(git remote -v)
+EOF
+}
+
 function main() {
     case "$1" in
         zshrc)
             zshrc $2
+            ;;
+        help | --help | -H)
+            main_help
+            exit 0
+            ;;
+        version | --version | -V)
+            main_version
+            exit 0
             ;;
         *)
             echo "Unknown sub-command '$1'" 1>&2
