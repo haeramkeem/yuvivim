@@ -3,11 +3,17 @@
 
 VERSION="v0.1.0"
 
+#
+# zshrc
+#
 function zshrc() {
     local zshrc_src="./zshrc/.zshrc"
     local zshrc_dst="$HOME/.zshrc"
 
     case "$1" in
+        help | --help | -H)
+            zshrc_help
+            ;;
         diff)
             zshrc_diff $zshrc_src $zshrc_dst
             ;;
@@ -22,6 +28,23 @@ function zshrc() {
             exit 1
             ;;
     esac
+}
+
+function zshrc_help() {
+cat << EOF | column -t -s '|'
+SUBCOMMAND|DESCRIPTION
+diff|Compare .zshrc file for current git repository and home directory.
+export|Export .zshrc file from current git repository to home directory.
+import|Import .zshrc file from home directory to current git repository.
+EOF
+}
+
+function zshrc_diff() {
+    local zshrc_src="$1"
+    local zshrc_dst="$2"
+
+    colordiff "$zshrc_src" "$zshrc_dst" \
+        && echo "zshrc synced with '$HOME/.zshrc'"
 }
 
 function zshrc_import() {
@@ -40,12 +63,25 @@ function zshrc_export() {
     mv "$zshrc_src" "$zshrc_dst"
 }
 
-function zshrc_diff() {
-    local zshrc_src="$1"
-    local zshrc_dst="$2"
-
-    colordiff "$zshrc_src" "$zshrc_dst" \
-        && echo "zshrc synced with '$HOME/.zshrc'"
+#
+# main
+#
+function main() {
+    case "$1" in
+        zshrc)
+            zshrc $2
+            ;;
+        help | --help | -H)
+            main_help
+            ;;
+        version | --version | -V)
+            main_version
+            ;;
+        *)
+            echo "Unknown sub-command '$1'" 1>&2
+            exit 1
+            ;;
+    esac
 }
 
 function main_help() {
@@ -62,26 +98,6 @@ VIVIMCTL version $VERSION
 GIT STATUS:
 $(git remote -v)
 EOF
-}
-
-function main() {
-    case "$1" in
-        zshrc)
-            zshrc $2
-            ;;
-        help | --help | -H)
-            main_help
-            exit 0
-            ;;
-        version | --version | -V)
-            main_version
-            exit 0
-            ;;
-        *)
-            echo "Unknown sub-command '$1'" 1>&2
-            exit 1
-            ;;
-    esac
 }
 
 main $@
