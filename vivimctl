@@ -1,7 +1,17 @@
 #!/bin/bash
 # vim: set ft=sh:
 
+set -e
 VERSION="v0.1.0"
+
+#
+# error
+#
+function error_unknown_command() {
+    local command="$1"
+    local subcommand="$2"
+    echo "error: Unknown subcommand or option \"$subcommand\" for \"$command\"" 1>&2
+}
 
 #
 # zshrc
@@ -24,7 +34,7 @@ function zshrc() {
             zshrc_export $zshrc_src $zshrc_dst
             ;;
         *)
-            echo "Unknown sub-command for zshrc '$1'" 1>&2
+            error_unknown_command "vivimctl zshrc" "$1"
             exit 1
             ;;
     esac
@@ -78,7 +88,7 @@ function main() {
             main_version
             ;;
         *)
-            echo "Unknown sub-command '$1'" 1>&2
+            error_unknown_command "vivimctl" "$1"
             exit 1
             ;;
     esac
