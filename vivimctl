@@ -1,8 +1,13 @@
 #!/bin/bash
 # vim: set ft=sh:
 
-set -e
 VERSION="v0.1.0"
+
+#
+# env
+#
+if [[ -f $HOME/.vivimrc ]]; then source $HOME/.vivimrc; fi
+VIVIM_PATH=${VIVIM_PATH:="."}
 
 #
 # error
@@ -17,7 +22,7 @@ function error_unknown_command() {
 # zshrc
 #
 function zshrc() {
-    local zshrc_src="./zshrc/.zshrc"
+    local zshrc_src="$VIVIM_PATH/zshrc/.zshrc"
     local zshrc_dst="$HOME/.zshrc"
 
     case "$1" in
@@ -74,12 +79,53 @@ function zshrc_export() {
 }
 
 #
+# install
+#
+function install() {
+    case "$1" in
+        "")
+            local vivim_abs_path=$(cd $VIVIM_PATH && pwd)
+            local vivim_install_path="/usr/local/bin/vivimctl"
+            echo "VIVIM_PATH='$vivim_abs_path'" > $HOME/.vivimrc
+            sudo ln -sf $vivim_abs_path/vivimctl /usr/local/bin/vivimctl && echo "vivimctl installed."
+            ;;
+        *)
+            echo "error: No subcommand or option available for command \"vivimctl install\""
+            exit 1
+            ;;
+    esac
+}
+
+#
+# pull
+#
+function pull() {
+    case "$1" in
+        "")
+            pushd $VIVIM_PATH &> /dev/null
+            git pull origin main
+            popd &> /dev/null
+            ;;
+        *)
+            echo "error: No subcommand or option available for command \"vivimctl pull\""
+            exit 1
+            ;;
+    esac
+}
+
+#
 # main
 #
 function main() {
     case "$1" in
         zshrc)
             zshrc $2
+            ;;
+        install)
+            install $2
+            ;;
+        pull)
+            pull $2
             ;;
         help | --help | -H)
             main_help
@@ -97,6 +143,9 @@ function main() {
 function main_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
+install|Install vivimctl by creating symlink in /usr/bin
+pull|Pull vivim git repository from main branch for origin
+version (--version, -V)|Print VIVIMCTL version
 zshrc|Manage zsh configuration file (zshrc)
 EOF
 }
@@ -105,8 +154,7 @@ function main_version() {
 cat << EOF
 VIVIMCTL version $VERSION
 
-GIT STATUS:
-$(git remote -v)
+VIVIM directory path: $VIVIM_PATH
 EOF
 }
 
