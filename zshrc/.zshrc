@@ -220,6 +220,15 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   exec tmux
 fi
 
+# Flush detached tmux session
+function tmux_flush() {
+    tmux ls \
+        | grep -v attached \
+        | tr ':' ' ' \
+        | awk '{print $1}' \
+        | xargs -n1 tmux kill-session -t
+}
+
 #########################
 # ZSH
 #########################

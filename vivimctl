@@ -43,7 +43,7 @@ function zshrc_diff() {
     local zshrc_src="$1"
     local zshrc_dst="$2"
 
-    colordiff "$zshrc_src" "$zshrc_dst" \
+    colordiff "$zshrc_dst" "$zshrc_src" \
         && echo "zshrc synced with '$HOME/.zshrc'"
 }
 
