@@ -52,7 +52,7 @@ function zshrc_import() {
     local zshrc_dst="$2"
 
     mv "$zshrc_src" "$zshrc_src.bak"
-    mv "$zshrc_dst" "$zshrc_src"
+    cp -v "$zshrc_dst" "$zshrc_src"
 }
 
 function zshrc_export() {
@@ -60,7 +60,7 @@ function zshrc_export() {
     local zshrc_dst="$2"
 
     mv "$zshrc_dst" "$zshrc_dst.bak"
-    mv "$zshrc_src" "$zshrc_dst"
+    cp -v "$zshrc_src" "$zshrc_dst"
 }
 
 #
