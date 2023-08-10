@@ -32,6 +32,9 @@ function zshrc() {
         diff)
             zshrc_diff $zshrc_src $zshrc_dst
             ;;
+        edit)
+            zshrc_edit $zshrc_src
+            ;;
         import)
             zshrc_import $zshrc_src $zshrc_dst
             ;;
@@ -49,6 +52,7 @@ function zshrc_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
 diff|Compare .zshrc file for current git repository and home directory.
+edit|Edit .zshrc file in VIVIM_PATH
 export|Export .zshrc file from current git repository to home directory.
 import|Import .zshrc file from home directory to current git repository.
 EOF
@@ -76,6 +80,12 @@ function zshrc_export() {
 
     mv "$zshrc_dst" "$zshrc_dst.bak"
     cp -v "$zshrc_src" "$zshrc_dst"
+}
+
+function zshrc_edit() {
+    local zshrc_src="$1"
+    vi $zshrc_src
+    echo "Do 'vivimctl export' and 'source ~/.zshrc' to export and source .zshrc in home directory"
 }
 
 #
