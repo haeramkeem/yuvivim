@@ -110,7 +110,8 @@ source $ZSH/oh-my-zsh.sh
 #########################
 
 export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"
-export PATH=$PATH:$HOME/.local/bin
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/Users/haeramkim/Library/Python/3.7/bin"
 alias python='python3'
 alias pip='pip3'
 
