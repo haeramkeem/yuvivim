@@ -258,5 +258,4 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Clipboard
-alias pbcopy='tr -d "\n" | pbcopy'
 alias pwdcopy='pwd | tr -d "\n" | pbcopy'
