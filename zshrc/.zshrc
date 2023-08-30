@@ -251,7 +251,7 @@ alias tlqkf='echo "fuck my life"'
 
 # Aliases
 alias alphabet='echo abcdefghijklmnopqrstuvwxyz'
-alias watch='watch -d -n0.2'
+alias watch='watch -d -n0.5'
 
 # Locale settings
 export LC_ALL=en_US.UTF-8
