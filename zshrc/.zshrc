@@ -164,13 +164,6 @@ KUBE_PS1_CTX_COLOR="green"
 KUBE_PS1_SYMBOL_PADDING="true"
 KUBE_PS1_SEPARATOR="|"
 
-# KUBECONFIG=$1 kubectl
-kubecfg() {
-    KUBECONFIG=$1
-    shift
-    KUBECONFIG=$KUBECONFIG kubectl $@
-}
-
 # kubecns
 alias kubecns='kubens'
 
@@ -190,14 +183,6 @@ alias ciliumx='cilium --context'
 
 # Get current branch (CURrent)
 alias git-cur='git rev-parse --abbrev-ref HEAD'
-
-# Set branch state (SetState)
-# Change Git Branch Status (GBS)
-chgbs() {
-    local STATE=$1
-    local BRANCH=$2
-    git branch -m $BRANCH $STATE/$BRANCH
-}
 
 ## git typo correction
 alias gti='git'
@@ -220,15 +205,6 @@ export PATH="/usr/local/opt/libkq/bin:$PATH"
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux
 fi
-
-# Flush detached tmux session
-function tmux_flush() {
-    tmux ls \
-        | grep -v attached \
-        | tr ':' ' ' \
-        | awk '{print $1}' \
-        | xargs -n1 tmux kill-session -t
-}
 
 #########################
 # ZSH
@@ -259,3 +235,7 @@ export LANG=en_US.UTF-8
 
 # Clipboard
 alias pwdcopy='pwd | tr -d "\n" | pbcopy'
+
+# Online functions
+source <(curl -fsSL https://raw.githubusercontent.com/haeramkeem/sh-it/main/func/tmux_flush/tmux_flush.sh 2> /dev/null || <<< "echo tmux_flush not loaded")
+source <(curl -fsSL https://raw.githubusercontent.com/haeramkeem/sh-it/main/func/x509_validity/x509_validity.sh 2> /dev/null || <<< "echo x509_validity not loaded")
