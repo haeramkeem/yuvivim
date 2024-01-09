@@ -85,6 +85,10 @@ function zshrc_export() {
 function zshrc_edit() {
     local zshrc_src="$1"
     vi $zshrc_src
+    cd $VIVIM_PATH \
+    && git add $zshrc_src &> /dev/null \
+    && git commit -m "autocommit: {\"target\": \"zshrc\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null \
+    && echo "Changes autocommited."
     echo "Do 'vivimctl export' and 'source ~/.zshrc' to export and source .zshrc in home directory"
 }
 
