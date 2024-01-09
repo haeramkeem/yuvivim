@@ -156,13 +156,13 @@ export NVM_DIR="$HOME/.nvm"
 source <(kubectl completion zsh)
 
 # Kube-ps1
-PS1='$(kube_ps1)'$PS1
-KUBE_PS1_PREFIX="["
-KUBE_PS1_SUFFIX="]"
-KUBE_PS1_SYMBOL_COLOR="blue"
+KUBE_PS1_PREFIX=""
+KUBE_PS1_SUFFIX=""
 KUBE_PS1_CTX_COLOR="green"
-KUBE_PS1_SYMBOL_PADDING="true"
-KUBE_PS1_SEPARATOR="|"
+KUBE_PS1_SYMBOL_ENABLE="false"
+
+# PS1 Setting
+PS1='[$(date +%Y/%m/%d-%H:%M)|$(kube_ps1)]'$PS1
 
 # kubecns
 alias kubecns='kubens'
@@ -236,6 +236,26 @@ export LANG=en_US.UTF-8
 # Clipboard
 alias pwdcopy='pwd | tr -d "\n" | pbcopy'
 
-# Online functions
-source <(curl -fsSL https://raw.githubusercontent.com/haeramkeem/sh-it/main/func/tmux_flush/tmux_flush.sh 2> /dev/null || <<< "echo tmux_flush not loaded")
-source <(curl -fsSL https://raw.githubusercontent.com/haeramkeem/sh-it/main/func/x509_validity/x509_validity.sh 2> /dev/null || <<< "echo x509_validity not loaded")
+function tmux_flush() {
+    tmux ls \
+        | grep -v attached \
+        | tr ':' ' ' \
+        | awk '{print $1}' \
+        | xargs -n1 tmux kill-session -t
+}
+
+function x509_validity() {
+    cat "-" | openssl x509 -noout -startdate -enddate
+}
+
+function nocolor() {
+    cat "-" | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g"
+}
+
+function tolower() {
+    cat "-" | tr '[[:upper:]]' '[[:lower:]]'
+}
+
+function toupper() {
+    cat "-" | tr '[[:lower:]]' '[[:upper:]]'
+}
