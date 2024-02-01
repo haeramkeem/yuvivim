@@ -35,11 +35,11 @@ function zshrc() {
         edit)
             zshrc_edit $zshrc_src
             ;;
-        import)
-            zshrc_import $zshrc_src $zshrc_dst
-            ;;
         export)
             zshrc_export $zshrc_src $zshrc_dst
+            ;;
+        import)
+            zshrc_import $zshrc_src $zshrc_dst
             ;;
         *)
             error_unknown_command "vivimctl zshrc" "$1"
@@ -66,12 +66,14 @@ function zshrc_diff() {
         && echo "zshrc synced with '$HOME/.zshrc'"
 }
 
-function zshrc_import() {
+function zshrc_edit() {
     local zshrc_src="$1"
-    local zshrc_dst="$2"
-
-    mv "$zshrc_src" "$zshrc_src.bak"
-    cp -v "$zshrc_dst" "$zshrc_src"
+    vi $zshrc_src
+    cd $VIVIM_PATH \
+    && git add $zshrc_src &> /dev/null \
+    && git commit -m "autocommit: {\"target\": \"zshrc\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null \
+    && echo "Changes autocommited."
+    echo "Do 'vivimctl export' and 'source ~/.zshrc' to export and source .zshrc in home directory"
 }
 
 function zshrc_export() {
@@ -82,14 +84,12 @@ function zshrc_export() {
     cp -v "$zshrc_src" "$zshrc_dst"
 }
 
-function zshrc_edit() {
+function zshrc_import() {
     local zshrc_src="$1"
-    vi $zshrc_src
-    cd $VIVIM_PATH \
-    && git add $zshrc_src &> /dev/null \
-    && git commit -m "autocommit: {\"target\": \"zshrc\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null \
-    && echo "Changes autocommited."
-    echo "Do 'vivimctl export' and 'source ~/.zshrc' to export and source .zshrc in home directory"
+    local zshrc_dst="$2"
+
+    mv "$zshrc_src" "$zshrc_src.bak"
+    cp -v "$zshrc_dst" "$zshrc_src"
 }
 
 #
@@ -111,13 +111,16 @@ function install() {
 }
 
 #
-# pull
+# sync
 #
-function pull() {
+function sync() {
     case "$1" in
         "")
             pushd $VIVIM_PATH &> /dev/null
-            git pull origin main
+            git add . \
+            && git commit -m "autocommit: {\"target\": \"all\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null
+            git pull --rebase origin main
+            git push origin main
             popd &> /dev/null
             ;;
         *)
@@ -138,8 +141,8 @@ function main() {
         install)
             install $2
             ;;
-        pull)
-            pull $2
+        sync)
+            sync $2
             ;;
         help | --help | -H)
             main_help
@@ -158,7 +161,7 @@ function main_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
 install|Install vivimctl by creating symlink in /usr/bin
-pull|Pull vivim git repository from main branch for origin
+sync|Sync vivim git repository with main branch for origin
 version (--version, -V)|Print VIVIMCTL version
 zshrc|Manage zsh configuration file (zshrc)
 EOF
