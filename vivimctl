@@ -119,8 +119,9 @@ function sync() {
             pushd $VIVIM_PATH &> /dev/null
             git add . \
             && git commit -m "autocommit: {\"target\": \"all\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null
-            git pull --rebase origin main
-            git push origin main
+            git pull --rebase origin main &> /dev/null \
+            && git push origin main &> /dev/null \
+            && echo "Vivim git repository synced."
             popd &> /dev/null
             ;;
         *)
