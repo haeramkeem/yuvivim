@@ -228,6 +228,7 @@ alias tlqkf='echo "fuck my life"'
 # Aliases
 alias alphabet='echo abcdefghijklmnopqrstuvwxyz'
 alias watch='watch -d -n0.5'
+alias ap='ansible-playbook'
 
 # Locale settings
 export LC_ALL=en_US.UTF-8
@@ -236,6 +237,7 @@ export LANG=en_US.UTF-8
 # Clipboard
 alias pwdcopy='pwd | tr -d "\n" | pbcopy'
 
+# Functions
 function tmux_flush() {
     tmux ls \
         | grep -v attached \
