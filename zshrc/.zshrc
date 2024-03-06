@@ -119,7 +119,7 @@ alias pip='pip3'
 # C++ settings
 #########################
 
-alias g++='g++ -std=c++17'
+#alias g++='g++ -std=c++17'
 
 #########################
 # Golang settings
