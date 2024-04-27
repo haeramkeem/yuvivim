@@ -1,14 +1,14 @@
 [user]
-	name = haeramkeem
+    name = haeramkeem
     email = haeram.kim1@gmail.com
-	signingkey = ~/.ssh/git
+    signingkey = ~/.ssh/id_rsa
 [url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [pull]
-	rebase = true
+    rebase = true
 [gpg]
-	format = ssh
+    format = ssh
 [commit]
-	gpgsign = true
+    gpgsign = true
