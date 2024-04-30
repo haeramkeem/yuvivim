@@ -21,8 +21,8 @@ set si
 set cindent
 set nu
 set expandtab
-set ts=4
-set shiftwidth=4
+set ts=2
+set shiftwidth=2
 
 " Search option
 set hls
@@ -33,16 +33,16 @@ set ic
 "	delete line & `:PlugClean` to uninstall plugin
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-	Plug 'sainnhe/sonokai'
-	Plug 'scrooloose/nerdcommenter'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'hashivim/vim-terraform'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'sainnhe/sonokai'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Key mapping
