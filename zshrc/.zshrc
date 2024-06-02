@@ -261,3 +261,7 @@ function tolower() {
 function toupper() {
     cat "-" | tr '[[:lower:]]' '[[:upper:]]'
 }
+
+function ff() {
+  grep -n "$1" $(find . -name '*.[cChHsS]')
+}
