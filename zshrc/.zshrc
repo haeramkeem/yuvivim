@@ -120,6 +120,7 @@ alias pip='pip3'
 #########################
 
 alias g++='g++ -std=c++17'
+alias ctags='/opt/homebrew/Cellar/ctags/5.8_2/bin/ctags'
 
 #########################
 # Golang settings
