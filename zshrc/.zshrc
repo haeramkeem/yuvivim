@@ -265,5 +265,5 @@ function toupper() {
 }
 
 function ff() {
-  grep -n "$1" $(find . -name '*.[cChHsS]')
+  grep -n "$1" $(find . -type f)
 }
