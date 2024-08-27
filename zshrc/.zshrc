@@ -265,5 +265,5 @@ function toupper() {
 }
 
 function ff() {
-  grep -n "$1" $(find . -type f | grep -vE 'tags')
+  grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
 }
