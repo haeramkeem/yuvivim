@@ -72,7 +72,6 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    kube-ps1
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -158,13 +157,14 @@ export NVM_DIR="$HOME/.nvm"
 source <(kubectl completion zsh)
 
 # Kube-ps1
-KUBE_PS1_PREFIX=""
-KUBE_PS1_SUFFIX=""
-KUBE_PS1_CTX_COLOR="green"
-KUBE_PS1_SYMBOL_ENABLE="false"
+# KUBE_PS1_PREFIX=""
+# KUBE_PS1_SUFFIX=""
+# KUBE_PS1_CTX_COLOR="green"
+# KUBE_PS1_SYMBOL_ENABLE="false"
 
 # PS1 Setting
-PS1='[$(date +%Y/%m/%d-%H:%M)|$(kube_ps1)]'$PS1
+# PS1='[$(date +%Y/%m/%d-%H:%M)|$(kube_ps1)]'$PS1
+PS1='[$(date +%Y/%m/%d-%H:%M)]'$PS1
 
 # kubecns
 alias kubecns='kubens'
