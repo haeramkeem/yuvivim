@@ -73,7 +73,7 @@ function zshrc_edit() {
     && git add $zshrc_src &> /dev/null \
     && git commit -m "autocommit: {\"target\": \"zshrc\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null \
     && echo "Changes autocommited."
-    echo "Do 'vivimctl export' and 'source ~/.zshrc' to export and source .zshrc in home directory"
+    echo "Do 'vivimctl zshrc export' and 'source ~/.zshrc' to export and source .zshrc in home directory"
 }
 
 function zshrc_export() {
