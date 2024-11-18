@@ -53,3 +53,5 @@ set ic
 ":noremap <c-k> gg
 "	End of file
 ":noremap <c-j> <s-g>
+
+:set colorcolumn=80

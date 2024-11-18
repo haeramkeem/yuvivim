@@ -41,7 +41,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'sainnhe/sonokai'
 	Plug 'scrooloose/nerdcommenter'
-    Plug 'hashivim/vim-terraform'
+	Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Key mapping
@@ -100,3 +100,5 @@ let g:NERDTrimTrailingWhitespace = 1
 let mapleader=","
 map <Leader>cc <plug>NERDComToggleComment
 map <Leader>c<space> <plug>NERDComComment
+
+:set colorcolumn=80

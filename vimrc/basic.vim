@@ -101,3 +101,5 @@ let g:NERDTrimTrailingWhitespace = 1
 let mapleader=","
 map <Leader>cc <plug>NERDComToggleComment
 map <Leader>c<space> <plug>NERDComComment
+
+:set colorcolumn=80
