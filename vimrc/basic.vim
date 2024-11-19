@@ -70,7 +70,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'ajmwagar/vim-deus'
-  Plug 'sainnhe/sonokai'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
