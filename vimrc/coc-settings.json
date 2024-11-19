@@ -1,56 +1,17 @@
+// filepath: ~/.vim/coc-settings.json
 {
-    "diagnostic.errorSign": "E",
-    "diagnostic.warningSign": "W",
-    "diagnostic.infoSign": "I",
-    "diagnostic.hintSign": "H",
-    "clangd.fallbackFlags": ["-std=c++17"],
-    "yaml.schemas": {
-        "kubernetes": "/*.yaml"
+    "diagnostic":{
+        "errorSign": "E",
+        "warningSign": "W",
+        "infoSign": "I",
+        "hintSign": "H"
     },
+    "clangd.fallbackFlags": ["-std=c++17"],
     "languageserver": {
-        // List of not-listed CoC Plugin:
-        // Install w/: `:CocInstall ...`
-        //    - coc-css
-        //    - coc-html
-        //    - coc-tsserver
-        //    - coc-json
-        //    - coc-markdownlint
-        //    - coc-pyright
-        //    - coc-vetur
-        //    - coc-sh
-        //    - coc-yaml
-
-        // Apple clangd; Additional installation not required
         "clangd": {
             "command": "clangd",
             "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
             "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
-        },
-
-        // Prerequisite: dockerfile-language-server-nodejs
-        // Install w/: `$ npm install -g dockerfile-language-server-nodejs`
-        "dockerfile": {
-            "command": "docker-langserver",
-            "filetypes": ["dockerfile"],
-            "args": ["--stdio"]
-        },
-
-        // Prerequisite: gopls
-        // Install w/: `$ go install golang.org/x/tools/gopls@latest`
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod"],
-            "filetypes": ["go"]
-        },
-
-        // Prerequisite: terraform-ls
-        // Install w/: `$ brew install hashicorp/tap/terraform-ls`
-        "terraform": {
-            "command": "terraform-ls",
-            "args": ["serve"],
-            "filetypes": ["terraform","tf"],
-            "initializationOptions": {},
-            "settings": {}
         }
     }
 }

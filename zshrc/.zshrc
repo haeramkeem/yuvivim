@@ -154,7 +154,7 @@ export NVM_DIR="$HOME/.nvm"
 #########################
 
 # Kubectl auto-completion
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
 
 # Kube-ps1
 # KUBE_PS1_PREFIX=""
