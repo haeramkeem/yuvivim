@@ -205,7 +205,7 @@ export PATH="/usr/local/opt/libkq/bin:$PATH"
 
 # TMUX autostart
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
+    exec tmux
 fi
 
 #########################
@@ -221,7 +221,11 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2
 #########################
 
 # Colordiff
-alias diff=colordiff
+if `colordiff --version &> /dev/null`; then
+    alias diff=colordiff
+else
+    alias diff="diff --color"
+fi
 
 # Calm down mate
 alias fuck='echo "fuck all of ya"'
