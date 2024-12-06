@@ -15,6 +15,10 @@ function error_unknown_command() {
     echo "error: Unknown subcommand or option \"$subcommand\" for \"$command\"" 1>&2
 }
 
+# dependency check
+DIFF_CMD="colordiff"
+if ! `colordiff --version &> /dev/null`; then DIFF_CMD="diff --color"; fi
+
 # SUBCOMMAND vimrc -----------------------------------------------------------
 function vimrc() {
     local vimrc_src="$VIVIM_PATH/vimrc/.vimrc"
@@ -57,7 +61,7 @@ function vimrc_diff() {
     local vimrc_src="$1"
     local vimrc_dst="$2"
 
-    colordiff "$vimrc_dst" "$vimrc_src" \
+    $DIFF_CMD "$vimrc_dst" "$vimrc_src" \
         && echo "vimrc synced with '$HOME/.vimrc'"
 }
 
@@ -129,7 +133,7 @@ function zshrc_diff() {
     local zshrc_src="$1"
     local zshrc_dst="$2"
 
-    colordiff "$zshrc_dst" "$zshrc_src" \
+    $DIFF_CMD "$zshrc_dst" "$zshrc_src" \
         && echo "zshrc synced with '$HOME/.zshrc'"
 }
 
