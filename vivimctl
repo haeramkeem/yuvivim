@@ -1,26 +1,93 @@
 #!/bin/bash
 # vim: set ft=sh:
 
-VERSION="v0.1.0"
+# Init VIVIMCTL --------------------------------------------------------------
+VERSION="v0.1.1"
 
-#
 # env
-#
 if [[ -f $HOME/.vivimrc ]]; then source $HOME/.vivimrc; fi
 VIVIM_PATH=${VIVIM_PATH:="."}
 
-#
 # error
-#
 function error_unknown_command() {
     local command="$1"
     local subcommand="$2"
     echo "error: Unknown subcommand or option \"$subcommand\" for \"$command\"" 1>&2
 }
 
-#
-# zshrc
-#
+# SUBCOMMAND vimrc -----------------------------------------------------------
+function vimrc() {
+    local vimrc_src="$VIVIM_PATH/vimrc/.vimrc"
+    local vimrc_dst="$HOME/.vimrc"
+
+    case "$1" in
+        help | --help | -H)
+            vimrc_help
+            ;;
+        diff)
+            vimrc_diff $vimrc_src $vimrc_dst
+            ;;
+        edit)
+            vimrc_edit $vimrc_src
+            ;;
+        export)
+            vimrc_export $vimrc_src $vimrc_dst
+            ;;
+        import)
+            vimrc_import $vimrc_src $vimrc_dst
+            ;;
+        *)
+            error_unknown_command "vivimctl vimrc" "$1"
+            exit 1
+            ;;
+    esac
+}
+
+function vimrc_help() {
+cat << EOF | column -t -s '|'
+SUBCOMMAND|DESCRIPTION
+diff|Compare .vimrc file for current git repository and home directory.
+edit|Edit .vimrc file in VIVIM_PATH
+export|Export .vimrc file from current git repository to home directory.
+import|Import .vimrc file from home directory to current git repository.
+EOF
+}
+
+function vimrc_diff() {
+    local vimrc_src="$1"
+    local vimrc_dst="$2"
+
+    colordiff "$vimrc_dst" "$vimrc_src" \
+        && echo "vimrc synced with '$HOME/.vimrc'"
+}
+
+function vimrc_edit() {
+    local vimrc_src="$1"
+    vi $vimrc_src
+    cd $VIVIM_PATH \
+    && git add $vimrc_src &> /dev/null \
+    && git commit -m "autocommit: {\"target\": \"vimrc\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null \
+    && echo "Changes autocommited."
+    echo "Do 'vivimctl vimrc export' to export the changes"
+}
+
+function vimrc_export() {
+    local vimrc_src="$1"
+    local vimrc_dst="$2"
+
+    mv "$vimrc_dst" "$vimrc_dst.bak"
+    cp -v "$vimrc_src" "$vimrc_dst"
+}
+
+function vimrc_import() {
+    local vimrc_src="$1"
+    local vimrc_dst="$2"
+
+    mv "$vimrc_src" "$vimrc_src.bak"
+    cp -v "$vimrc_dst" "$vimrc_src"
+}
+
+# SUBCOMMAND zshrc -----------------------------------------------------------
 function zshrc() {
     local zshrc_src="$VIVIM_PATH/zshrc/.zshrc"
     local zshrc_dst="$HOME/.zshrc"
@@ -92,13 +159,11 @@ function zshrc_import() {
     cp -v "$zshrc_dst" "$zshrc_src"
 }
 
-#
-# install
-#
+# SUBCOMMAND install ---------------------------------------------------------
 function install() {
     case "$1" in
         "")
-            local vivim_abs_path=$(cd $VIVIM_PATH && pwd)
+            local vivim_abs_path=$(cd `dirname $0` && pwd)
             local vivim_install_path="/usr/local/bin/vivimctl"
             echo "VIVIM_PATH='$vivim_abs_path'" > $HOME/.vivimrc
             sudo ln -sf $vivim_abs_path/vivimctl /usr/local/bin/vivimctl && echo "vivimctl installed."
@@ -110,40 +175,17 @@ function install() {
     esac
 }
 
-#
-# sync
-#
-function sync() {
-    case "$1" in
-        "")
-            pushd $VIVIM_PATH &> /dev/null
-            git add . \
-            && git commit -m "autocommit: {\"target\": \"all\", \"date\": \"$(date -Iseconds)\", \"uuid\": \"$(uuidgen | tr '[[:upper:]]' '[[:lower:]]')\"}" &> /dev/null
-            git pull --rebase origin main &> /dev/null \
-            && git push origin main &> /dev/null \
-            && echo "Vivim git repository synced."
-            popd &> /dev/null
-            ;;
-        *)
-            echo "error: No subcommand or option available for command \"vivimctl pull\""
-            exit 1
-            ;;
-    esac
-}
-
-#
-# main
-#
+# Main -----------------------------------------------------------------------
 function main() {
     case "$1" in
+        vimrc)
+            vimrc $2
+            ;;
         zshrc)
             zshrc $2
             ;;
         install)
             install $2
-            ;;
-        sync)
-            sync $2
             ;;
         help | --help | -H)
             main_help
@@ -162,8 +204,8 @@ function main_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
 install|Install vivimctl by creating symlink in /usr/bin
-sync|Sync vivim git repository with main branch for origin
 version (--version, -V)|Print VIVIMCTL version
+vimrc|Manage vim configuration file (vimrc)
 zshrc|Manage zsh configuration file (zshrc)
 EOF
 }
