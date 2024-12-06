@@ -118,7 +118,7 @@ alias pip='pip3'
 # C++ settings
 #########################
 
-alias g++='g++ -std=c++17'
+alias g17='g++ -std=c++17'
 # alias ctags='/opt/homebrew/Cellar/ctags/5.8_2/bin/ctags'
 # alias cpptags='/opt/homebrew/Cellar/ctags/5.8_2/bin/ctags --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -R'
 
@@ -164,7 +164,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # PS1 Setting
 # PS1='[$(date +%Y/%m/%d-%H:%M)|$(kube_ps1)]'$PS1
-PS1='[$(date +%Y/%m/%d-%H:%M)]'$PS1
+# PS1='[$(date +%Y/%m/%d-%H:%M)]'$PS1
 
 # kubecns
 alias kubecns='kubens'
@@ -265,5 +265,5 @@ function toupper() {
 }
 
 function ff() {
-  grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
+    grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
 }
