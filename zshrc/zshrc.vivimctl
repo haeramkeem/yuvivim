@@ -1,0 +1,76 @@
+#!/bin/bash
+# vim: set ft=sh:
+
+# SUBCOMMAND zshrc -----------------------------------------------------------
+
+function zshrc_error_unknown_command() {
+    local subcommand="$1"
+    echo "error: Unknown subcommand or option \"$subcommand\" for \"vivimctl zshrc\"." 1>&2
+}
+
+function zshrc() {
+    local zshrc_src="$VIVIM_PATH/zshrc/.zshrc"
+    local zshrc_dst="$HOME/.zshrc"
+
+    case "$1" in
+        help | --help | -H)
+            zshrc_help
+            ;;
+        diff)
+            zshrc_diff $zshrc_src $zshrc_dst
+            ;;
+        edit)
+            zshrc_edit $zshrc_src
+            ;;
+        export)
+            zshrc_export $zshrc_src $zshrc_dst
+            ;;
+        import)
+            zshrc_import $zshrc_src $zshrc_dst
+            ;;
+        *)
+            zshrc_error_unknown_command "$1"
+            exit 1
+            ;;
+    esac
+}
+
+function zshrc_help() {
+cat << EOF | column -t -s '|'
+SUBCOMMAND|DESCRIPTION
+diff|Compare .zshrc file for current git repository and home directory.
+edit|Edit .zshrc file in VIVIM_PATH
+export|Export .zshrc file from current git repository to home directory.
+import|Import .zshrc file from home directory to current git repository.
+EOF
+}
+
+function zshrc_diff() {
+    local zshrc_src="$1"
+    local zshrc_dst="$2"
+
+    $DIFF_CMD "$zshrc_dst" "$zshrc_src" \
+        && echo "zshrc synced with '$HOME/.zshrc'"
+}
+
+function zshrc_edit() {
+    local zshrc_src="$1"
+    vi $zshrc_src
+    echo "Do 'vivimctl zshrc export' and 'source ~/.zshrc' to refresh the changes."
+}
+
+function zshrc_export() {
+    local zshrc_src="$1"
+    local zshrc_dst="$2"
+
+    mv "$zshrc_dst" "$zshrc_dst.bak" &> /dev/null
+    cp -v "$zshrc_src" "$zshrc_dst"
+}
+
+function zshrc_import() {
+    local zshrc_src="$1"
+    local zshrc_dst="$2"
+
+    mv "$zshrc_src" "$zshrc_src.bak" &> /dev/null
+    cp -v "$zshrc_dst" "$zshrc_src"
+}

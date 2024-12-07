@@ -1,0 +1,76 @@
+#!/bin/bash
+# vim: set ft=sh:
+
+# SUBCOMMAND vimrc -----------------------------------------------------------
+
+function vimrc_error_unknown_command() {
+    local subcommand="$1"
+    echo "error: Unknown subcommand or option \"$subcommand\" for \"vivimctl vimrc\"." 1>&2
+}
+
+function vimrc() {
+    local vimrc_src="$VIVIM_PATH/vimrc/.vimrc"
+    local vimrc_dst="$HOME/.vimrc"
+
+    case "$1" in
+        help | --help | -H)
+            vimrc_help
+            ;;
+        diff)
+            vimrc_diff $vimrc_src $vimrc_dst
+            ;;
+        edit)
+            vimrc_edit $vimrc_src
+            ;;
+        export)
+            vimrc_export $vimrc_src $vimrc_dst
+            ;;
+        import)
+            vimrc_import $vimrc_src $vimrc_dst
+            ;;
+        *)
+            vimrc_error_unknown_command "$1"
+            exit 1
+            ;;
+    esac
+}
+
+function vimrc_help() {
+cat << EOF | column -t -s '|'
+SUBCOMMAND|DESCRIPTION
+diff|Compare .vimrc file for current git repository and home directory.
+edit|Edit .vimrc file in VIVIM_PATH
+export|Export .vimrc file from current git repository to home directory.
+import|Import .vimrc file from home directory to current git repository.
+EOF
+}
+
+function vimrc_diff() {
+    local vimrc_src="$1"
+    local vimrc_dst="$2"
+
+    $DIFF_CMD "$vimrc_dst" "$vimrc_src" \
+        && echo "vimrc synced with '$HOME/.vimrc'"
+}
+
+function vimrc_edit() {
+    local vimrc_src="$1"
+    vi $vimrc_src
+    echo "Do 'vivimctl vimrc export' to refresh the changes."
+}
+
+function vimrc_export() {
+    local vimrc_src="$1"
+    local vimrc_dst="$2"
+
+    mv "$vimrc_dst" "$vimrc_dst.bak" &> /dev/null
+    cp -v "$vimrc_src" "$vimrc_dst"
+}
+
+function vimrc_import() {
+    local vimrc_src="$1"
+    local vimrc_dst="$2"
+
+    mv "$vimrc_src" "$vimrc_src.bak" &> /dev/null
+    cp -v "$vimrc_dst" "$vimrc_src"
+}
