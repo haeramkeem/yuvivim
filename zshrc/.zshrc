@@ -271,3 +271,9 @@ function toupper() {
 function ff() {
     grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
 }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/haeramkeem/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
