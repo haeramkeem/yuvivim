@@ -73,6 +73,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ajmwagar/vim-deus'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'wsdjeg/vim-fetch'
 call plug#end()
 
 " - CoC
