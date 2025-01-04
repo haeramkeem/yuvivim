@@ -13,9 +13,9 @@ filetype indent on
 
 " - Syntax Highlighting
 if has("syntax")
-    set re=0
-    set rdt=0
-    syntax on
+  set re=0
+  set rdt=0
+  syntax on
 endif
 
 " - Search option
@@ -29,8 +29,8 @@ set si
 set cindent
 set nu
 set expandtab " Set \t to spaces
-set ts=4
-set shiftwidth=4
+set ts=2
+set shiftwidth=2
 " - Max line
 set colorcolumn=80
 
@@ -65,15 +65,15 @@ set colorcolumn=80
 "   delete line & `:PlugClean` to uninstall plugin
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'ajmwagar/vim-deus'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'wsdjeg/vim-fetch'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'ajmwagar/vim-deus'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'wsdjeg/vim-fetch'
 call plug#end()
 
 " - CoC

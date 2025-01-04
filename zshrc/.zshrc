@@ -8,7 +8,14 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+case `hostname` in
+  hk-mainframe)
+    ZSH_THEME="af-magic"
+    ;;
+  *)
+    ZSH_THEME="agnoster"
+    ;;
+esac
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -272,8 +279,13 @@ function ff() {
     grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
 }
 
+# GCP ------------------------------------------------------------------------
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
+  . '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc'
+fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/haeramkeem/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
+  . '/Users/haeramkeem/Downloads/google-cloud-sdk/completion.zsh.inc'
+fi
