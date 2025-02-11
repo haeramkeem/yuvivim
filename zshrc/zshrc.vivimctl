@@ -41,10 +41,10 @@ function zshrc() {
 function zshrc_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
-diff|Compare .zshrc file for current git repository and home directory.
+diff|Compare .zshrc file for \$VIVIM_PATH and home directory.
 edit|Edit .zshrc file in VIVIM_PATH
-export|Export .zshrc file from current git repository to home directory.
-import|Import .zshrc file from home directory to current git repository.
+export|Export .zshrc file from \$VIVIM_PATH to home directory.
+import|Import .zshrc file from home directory to \$VIVIM_PATH.
 EOF
 }
 

@@ -38,10 +38,10 @@ function vimrc() {
 function vimrc_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
-diff|Compare .vimrc file for current git repository and home directory.
+diff|Compare .vimrc file for \$VIVIM_PATH and home directory.
 edit|Edit .vimrc file in VIVIM_PATH
-export|Export .vimrc file from current git repository to home directory.
-import|Import .vimrc file from home directory to current git repository.
+export|Export .vimrc file from \$VIVIM_PATH to home directory.
+import|Import .vimrc file from home directory to \$VIVIM_PATH.
 EOF
 }
 
