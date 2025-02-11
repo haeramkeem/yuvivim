@@ -3,6 +3,7 @@
 
 # Init VIVIMCTL --------------------------------------------------------------
 VERSION="v0.1.1"
+INSTALL_PATH="/usr/local/bin/vivimctl"
 
 # env
 if [[ -f $HOME/.vivimrc ]]; then source $HOME/.vivimrc; fi
@@ -30,12 +31,52 @@ function install() {
     case "$1" in
         "")
             local vivim_abs_path=$(cd `dirname $0` && pwd)
-            local vivim_install_path="/usr/local/bin/vivimctl"
             echo "VIVIM_PATH='$vivim_abs_path'" > $HOME/.vivimrc
-            sudo ln -sf $vivim_abs_path/vivimctl /usr/local/bin/vivimctl && echo "vivimctl installed."
+            sudo ln -sf $vivim_abs_path/vivimctl $INSTALL_PATH && echo "vivimctl installed."
             ;;
         *)
             echo "error: No subcommand or option available for command \"vivimctl install\""
+            exit 1
+            ;;
+    esac
+}
+
+# SUBCOMMAND version|config ---------------------------------------------------
+function main_version() {
+cat << EOF
+VIVIMCTL version $VERSION
+
+VIVIM directory path: $VIVIM_PATH
+EOF
+}
+
+function main_config_help() {
+cat << EOF | column -t -s '|'
+SUBCOMMAND|DESCRIPTION
+(default)|Print all configs
+help (--help, -H)|Print config help message
+directory (--directory, -D, dir, --dir)|Print VIVIM directory only
+cmd (--cmd, -C)|Print cmd install path only
+EOF
+}
+
+function main_config() {
+    case "$1" in
+        "")
+            echo "VIVIM directory path: $VIVIM_PATH"
+            echo "VIVIM install path: $INSTALL_PATH"
+            ;;
+        help | --help | -H)
+            main_config_help
+            ;;
+        dir | --dir | directory | --directory | -D)
+            echo "$VIVIM_PATH"
+            ;;
+        cmd | --cmd | -C)
+            echo "$INSTALL_PATH"
+            ;;
+        *)
+            error_unknown_command "vivimctl config" "$1"
             exit 1
             ;;
     esac
@@ -59,6 +100,9 @@ function main() {
         version | --version | -V)
             main_version
             ;;
+        config)
+            main_config $2
+            ;;
         *)
             error_unknown_command "vivimctl" "$1"
             exit 1
@@ -69,18 +113,12 @@ function main() {
 function main_help() {
 cat << EOF | column -t -s '|'
 SUBCOMMAND|DESCRIPTION
-install|Install vivimctl by creating symlink in /usr/bin
-version (--version, -V)|Print VIVIMCTL version
 vimrc|Manage vim configuration file (vimrc)
 zshrc|Manage zsh configuration file (zshrc)
-EOF
-}
-
-function main_version() {
-cat << EOF
-VIVIMCTL version $VERSION
-
-VIVIM directory path: $VIVIM_PATH
+install|Install vivimctl by creating symlink in /usr/bin
+help (--help, -H)|Print help message
+version (--version, -V)|Print VIVIMCTL version
+config|Print VIVIMCTL configurations
 EOF
 }
 
