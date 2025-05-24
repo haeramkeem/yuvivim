@@ -29,8 +29,8 @@ set si
 set cindent
 set nu
 set expandtab " Set \t to spaces
-set ts=2
-set shiftwidth=2
+set ts=4
+set shiftwidth=4
 " - Max line
 set colorcolumn=80
 
@@ -72,15 +72,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'ajmwagar/vim-deus'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'wsdjeg/vim-fetch'
 call plug#end()
 
 " - CoC
 "   Make <CR> auto-select the first completion item and notify coc.nvim to
 "   format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " - Theme
 set background=dark
