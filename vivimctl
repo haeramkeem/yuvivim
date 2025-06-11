@@ -48,7 +48,7 @@ function main() {
             vimrc $2
             ;;
         zshrc)
-            zshrc $2
+            zshrc $2 $3
             ;;
         install)
             install $2
