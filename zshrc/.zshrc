@@ -9,11 +9,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 case `hostname` in
-  hk-mainframe | nvmevirt-sb)
-    ZSH_THEME="af-magic"
-    ;;
-  *)
+  # Local
+  hrk-MacBookPro.local)
     ZSH_THEME="agnoster"
+    ;;
+  # Remote
+  *)
+    ZSH_THEME="af-magic"
     ;;
 esac
 
