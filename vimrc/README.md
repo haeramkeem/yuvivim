@@ -50,6 +50,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 :PlugInstall
 ```
 
+#### Troubleshoot: VIM version error
+
 - If u got these errors below:
 
 ```
@@ -78,15 +80,27 @@ sudo apt install vim
 
 ### 3. Install Lang Server
 
+#### C/C++
+
 - C/C++ language server configuration is included in the `coc-settings.json`
 by default.
 - For C/C++, install `clangd` with the following commands
 ([Reference](https://clangd.llvm.org/installation)):
 
+1. Check available clangd version:
+
 ```bash
-sudo apt-get install clangd-12
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
+sudo apt-cache search clangd
 ```
+
+2. Install the supported clangd (install `clangd-19` in the following example):
+
+```bash
+sudo apt-get install clangd-19
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-19 100
+```
+
+#### Others
 
 - For additional lang servers, see
 [this](https://github.com/neoclide/coc.nvim/wiki/Language-servers) guide.
