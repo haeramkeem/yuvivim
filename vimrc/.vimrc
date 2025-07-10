@@ -74,6 +74,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ajmwagar/vim-deus'
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'wsdjeg/vim-fetch'
+  " Plug 'github/copilot.vim'
 call plug#end()
 
 " - CoC

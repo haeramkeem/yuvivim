@@ -278,7 +278,14 @@ function toupper() {
 }
 
 function ff() {
+    # grep -n "$1" $(find . -regex ".*\.\(c\|cc\|cpp\|h\|hpp\)") 2>/dev/null
     grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
+}
+
+function shim() {
+    touch "$1"
+    chmod +x "$1"
+    vim "$1"
 }
 
 # GCP ------------------------------------------------------------------------
