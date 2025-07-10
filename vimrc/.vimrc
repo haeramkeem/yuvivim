@@ -75,6 +75,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'wsdjeg/vim-fetch'
   " Plug 'github/copilot.vim'
+  Plug 'preservim/nerdtree'
 call plug#end()
 
 " - CoC
@@ -82,6 +83,9 @@ call plug#end()
 "   format on enter, <cr> could be remapped by other vim plugin
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 "                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" - NERDTree
+:noremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " - Theme
 set background=dark
