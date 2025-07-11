@@ -129,7 +129,7 @@ alias pip='pip3'
 
 alias g17='g++ -std=c++17'
 # alias ctags='/opt/homebrew/Cellar/ctags/5.8_2/bin/ctags'
-# alias cpptags='/opt/homebrew/Cellar/ctags/5.8_2/bin/ctags --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -R'
+alias cpptags='ctags --c++-kinds=+p --fields=+iaS --extras=+q --language-force=C++'
 
 #########################
 # Golang settings
@@ -283,7 +283,7 @@ function ff() {
 }
 
 function shim() {
-    touch "$1"
+    echo "#!/bin/bash\n" > "$1"
     chmod +x "$1"
     vim "$1"
 }
