@@ -288,6 +288,10 @@ function shim() {
     vim "$1"
 }
 
+function fcopy() {
+    cat "$1" | pbcopy
+}
+
 # GCP -------------------------------------------------------------------------
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/haeramkeem/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
