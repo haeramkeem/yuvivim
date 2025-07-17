@@ -195,6 +195,9 @@ alias ciliumx='cilium --context'
 # Get current branch (CURrent)
 alias git-cur='git rev-parse --abbrev-ref HEAD'
 
+# Get current commit hash
+alias git-hash='git rev-parse --short HEAD'
+
 ## git typo correction
 alias gti='git'
 
