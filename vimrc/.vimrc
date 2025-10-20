@@ -74,7 +74,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'ajmwagar/vim-deus'
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'wsdjeg/vim-fetch'
-  " Plug 'github/copilot.vim'
   Plug 'preservim/nerdtree'
 call plug#end()
 
@@ -85,7 +84,10 @@ call plug#end()
 "                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " - NERDTree
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 :noremap <silent> <C-n> :NERDTreeToggle<CR>
+:nnoremap <silent> <C-f> :NERDTreeFocus<CR>
 
 " - Theme
 set background=dark

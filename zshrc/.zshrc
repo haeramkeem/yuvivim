@@ -280,8 +280,11 @@ function toupper() {
     cat "-" | tr '[[:lower:]]' '[[:upper:]]'
 }
 
+function f() {
+    grep -n "$1" $(find . -regex ".*\.\(c\|cc\|cpp\|h\|hpp\)") 2>/dev/null
+}
+
 function ff() {
-    # grep -n "$1" $(find . -regex ".*\.\(c\|cc\|cpp\|h\|hpp\)") 2>/dev/null
     grep -n "$1" $(find . -type f | grep -vE 'tags') 2>/dev/null
 }
 
